@@ -17,6 +17,8 @@ windows10, matlab2022
 
 i)理论上只要两幅就可以标定出激光平面，但实际中可以多采一些图，采集的过程中，棋盘格不要与相机正视，要有一定角度，形成透视变换，这样好检测消隐点，同时激光线条最好完整穿过棋盘格。一副好的激光-棋盘格图片，程序应该能够检测出尽量多的棋盘格的角点，使得棋盘格的水平和垂直线簇能够拟合，从而得到所有的角点。一个简单判断这副图片是否满足要求的方法是，利用matlab自带的相机标定工具，加载这些图片，看角点检测情况，从而决定取哪些图。
 
+![相机标定](https://github.com/RayCAS2017/LineStructureLightCalib/raw/main/assets/matlab_camera_cali.jpg)
+
 ii) 棋盘格的水平线簇和垂直线簇不可能都交于一点，可以通过看投影误差看相交的怎么样。程序代码中，剔除了一些投影误差比较大的线；
 
 ![消隐点投影误差](https://github.com/RayCAS2017/LineStructureLightCalib/raw/main/assets/vp_proj_error.jpg)
