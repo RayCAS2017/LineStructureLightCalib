@@ -19,10 +19,11 @@ i)理论上只要两幅就可以标定出激光平面，但实际中可以多采
 
 ii) 棋盘格的水平线簇和垂直线簇不可能都交于一点，可以通过看投影误差看相交的怎么样。程序代码中，剔除了一些投影误差比较大的线；
 
-![消隐点投影误差](https://github.com/RayCAS2017/LineStructureLightCalib/raw/main/assets/vp_proj_error.jpg "The project error of the horrizontal and vertical vanish points")
-
+![消隐点投影误差](https://github.com/RayCAS2017/LineStructureLightCalib/raw/main/assets/vp_proj_error.jpg)
 
 iii) 激光线条中心像素点的提取。为了不受周边高亮区域的影响，程序自动提取了一个大致靶面。这个时候，可能棋盘格边缘白色高亮的地方也检测为激光像素点。所以，在拟合激光线条的时候，又做了一层处理，只提取了棋盘格角点最小外接四边形内的像素点。
+
+![激光线提取](https://github.com/RayCAS2017/LineStructureLightCalib/raw/main/assets/detect_laser_line.jpg)
 
 iv)采用文献[1]中式（12），做Levenberg-Marguqrdt进行非线性优化，联合优化线结构光的4个参数（a1,a2,a3，d）,确实提升了精度。
 
