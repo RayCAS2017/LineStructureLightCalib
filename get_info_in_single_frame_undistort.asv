@@ -412,8 +412,7 @@ if is_show
     %im_u = undistortImage(im,Kc,D);
     [im_u, im_u_newOrigin] = undistortImage(im,cameraParas,'OutputView','full');
 %     vertices_u = undistortImagePoint(vertices,Kc,D);
-%     vertices_u = undistortPoints(vertices,cameraParas);
-    vertices_u = vertices;
+    vertices_u = undistortPoints(vertices,cameraParas);
     subplot(121)
     imshow(im_u);
     hold on 

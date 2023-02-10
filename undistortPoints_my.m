@@ -27,7 +27,7 @@ for i = 1:max_iters
     else
         Xk = Xk1;
     end
-    [Xk1,error] = single_initer(Xk,Xd,D);
+    [Xk1,error] = single_iter(Xk,Xd,D);
     if error < error_thresh
         break
     end
@@ -37,7 +37,7 @@ points_undistorted = [Xk1(:,1)*fx+cx, Xk1(:,2)*fy+cy];
 
 end
 
-function [Xk1,error] = single_initer(Xk,Xd,D)
+function [Xk1,error] = single_iter(Xk,Xd,D)
 r2 = Xk(:,1).^2 + Xk(:,2).^2;
 FXk = 1 + D(1)*r2+D(2)*r2.^2;
 GXk = [2*D(4)*Xk(:,1).*Xk(:,2)+D(5)*(r2+2*Xk(:,1).^2), D(4)*(r2+2*Xk(:,2).^2)+2*D(5)*Xk(:,1).*Xk(:,2)];
