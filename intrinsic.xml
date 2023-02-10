@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<opencv_storage>
+   <WRITE_TIM>17-Jan-2023 17:53:32</WRITE_TIM>
+   <IntrinsicMatrix type_id="opencv-matrix">
+      <rows>3</rows>
+      <cols>3</cols>
+      <dt>d</dt>
+      <data>1063.598545 0.000000 928.608253 0.000000 1063.525059 594.020742 0.000000 0.000000 1.000000 </data>
+   </IntrinsicMatrix>
+   <DistortionCoef type_id="opencv-matrix">
+      <rows>1</rows>
+      <cols>5</cols>
+      <dt>d</dt>
+      <data>-0.154841 0.108281 -0.036266 -0.000825 0.000383 </data>
+   </DistortionCoef>
+</opencv_storage>
