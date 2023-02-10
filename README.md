@@ -27,8 +27,9 @@ iii) 激光线条中心像素点的提取。为了不受周边高亮区域的影
 iv)采用文献[1]中式（12），做Levenberg-Marguqrdt进行非线性优化，联合优化线结构光的4个参数（a1,a2,a3，d）,确实提升了精度。
 
 #### 验证步骤
-文件main_verify.mlx实现了对标定结果的验证。采用针形标靶数据（data/needlepoint）,其中有不同高度和不同间距的细针。采用畸变矫正标定和验证的结果，比不用的结果，精度提升比较多。
+文件main_verify.mlx实现了对标定结果的验证。采用针形标靶数据（data/needlepoint）,其中有不同高度和不同间距的细针。采用畸变矫正标定和验证的结果，比不用的结果，精度提升比较多。如下图所示，两个光点之间的距离是40mm,上面是不用畸变矫正的结果，下面是使用畸变矫正的结果。
 
+![验证结果](https://github.com/RayCAS2017/LineStructureLightCalib/raw/main/assets/verify_results.jpg)
 
 #### 改进项
 
