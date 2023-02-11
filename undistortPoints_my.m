@@ -1,11 +1,11 @@
-function points_undistorted = undistortPoints_my(points, Kc, D, max_iters, error_thresh)
+function [points_undistorted,error_proj] = undistortPoints_my(points, Kc, D, max_iters, diff_thresh)
 % 坐标[u,v],points 是一个n*2的矩阵
 % o--->u,x
 % |
 % v,y
 if nargin < 5
     max_iters=1000;
-    error_thresh = 1e-20;
+    diff_thresh = 1e-20;
 end
 fx = Kc(1,1);
 fy = Kc(2,2);
@@ -27,24 +27,34 @@ for i = 1:max_iters
     else
         Xk = Xk1;
     end
-    [Xk1,error] = single_iter(Xk,Xd,D);
-    if error < error_thresh
+    [Xk1,diff] = single_iter(Xk,Xd,D);
+    if diff < diff_thresh
         break
     end
 
 end
 points_undistorted = [Xk1(:,1)*fx+cx, Xk1(:,2)*fy+cy];
+error_proj = project_error(Xk1, Xd, D);
 
 end
 
-function [Xk1,error] = single_iter(Xk,Xd,D)
+function [Xk1,diff] = single_iter(Xk,Xd,D)
 r2 = Xk(:,1).^2 + Xk(:,2).^2;
 FXk = 1 + D(1)*r2+D(2)*r2.^2;
 GXk = [2*D(4)*Xk(:,1).*Xk(:,2)+D(5)*(r2+2*Xk(:,1).^2), D(4)*(r2+2*Xk(:,2).^2)+2*D(5)*Xk(:,1).*Xk(:,2)];
 Temp = Xd-GXk;
 Xk1 = [Temp(:,1)./FXk, Temp(:,2)./FXk];
-error = sqrt(sum((Xk1-Xk).* (Xk1-Xk),2));
-error = sum(error);
+diff = sqrt(sum((Xk1-Xk).* (Xk1-Xk),2));
+diff = mean(diff);
+end
+
+
+function error_proj = project_error(Xn, Xd, D)
+r2 = Xn(:,1).^2 + Xn(:,2).^2;
+Xd_estimate = zeros(size(xn));
+Xd_estimate(:,1) = Xn(:,1).*(1+D(1)*r2+D(2)*r2.^2) + D(4)*(r2+2*Xn(:,1).^2) + 2*D(5)*Xn(:,1).*Xn(:,2);
+Xd_estimate(:,2) = Xn(:,2).*(1+D(1)*r2+D(2)*r2.^2) + D(5)*(r2+2*Xn(:,2).^2) + 2*D(4)*Xn(:,1).*Xn(:,2);
+error_proj = sqrt(sum((Xd_estimate-Xd).* (Xd_estimate-Xd),2));
 end
 
 
